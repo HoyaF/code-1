@@ -1,0 +1,52 @@
+#保屋野 将峻
+memory[55001] -> 1
+Y -> 0
+X -> 5
+S -> 0
+OL -> 0
+OR -> 0
+OS -> 0
+fall_count -> 0
+while 1
+    NS -> memory[50008]
+    NL -> memory[50006]
+    NR -> memory[50007]
+    (memory[100 + (Y * 12) + (X - 1)] = 0) * (NL = 1) * (OL = 0) なら
+        X -> X - 1
+    (memory[100 + (Y * 12) + (X + 2)] = 0) * (NR = 1) * (OR = 0) なら
+        X -> X + 1
+    if (NS = 1) * (OS = 0)
+        S -> S + 1
+    if S = 4
+        S -> 0
+    OL -> NL
+    OR -> NR
+    OS -> NS
+    fall_count -> fall_count + 1
+    if fall_count > 20
+        Y -> Y + 1
+        fall_count -> 0
+    Tetrimino(Y,X,990000,S)
+    memory[55000] -> 1
+    Tetrimino(Y,X,0,S)
+    
+def Tetrimino(Y,X,color,S)
+    box(Y,X,color)
+    if S = 0
+        box(Y,X + 1,color)
+    if S = 1
+        box(Y + 1,X,color)
+    if S = 2
+        box(Y,X - 1,color)
+    if S = 3
+        box(Y - 1,X,color)
+        
+    
+def box(Y,X,color)
+    YNoT -> 0
+    while YNoT < 4
+        XNoT -> 0
+        while XNoT < 4
+            memory[60000 + (Y * 500) + (X * 5) + (YNoT * 100) + XNoT] -> color 
+            XNoT -> XNoT + 1
+        YNoT -> YNoT + 1
