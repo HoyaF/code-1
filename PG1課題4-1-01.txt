@@ -1,0 +1,61 @@
+wall()
+floor()
+game()
+
+def wall()
+    memory[55001] -> 1
+    NoT -> 0
+    while NoT < 20
+        memory[3] -> NoT #Y
+        memory[4] -> 0　#X
+        memory[5] -> 999999
+        square()
+        memory[3] -> NoT
+        memory[4] -> 11
+        square()
+        NoT -> NoT + 1
+        
+def floor()
+    NoT -> 0
+    while NoT < 10
+        memory[3] -> 19
+        memory[4] -> 1 + NoT
+        square()
+        NoT -> NoT + 1
+        
+def game()
+    Y -> 0
+    X -> 5
+    OL -> memory[50006]
+    OR -> memory[50007]
+    fall_count -> 0
+    while 1
+        NL -> memory[50006]
+        NR -> memory[50007]
+        if (X > 1) * (NL = 1) * (OL = 0)
+            X -> X - 1
+        if (X < 10) * (NR = 1) * (OR = 0)
+            X -> X + 1
+        OL -> NL
+        OR -> NR
+        fall_count -> fall_count + 1
+        if Y < 18
+            if fall_count > 9
+                Y -> Y + 1
+                fall_count -> 0 
+        memory[3] -> Y
+        memory[4] -> X
+        memory[5] -> 990000
+        square()
+        memory[55000] -> 1
+        memory[5] -> 0
+        square() #clear
+        
+def square()
+    YNoT -> 0
+    while YNoT < 4
+        XNoT -> 0
+        while XNoT < 4
+            memory[60000 + (memory[3] * 500) + (memory[4] * 5) + XNoT + (YNoT * 100)] -> memory[5]
+            XNoT -> XNoT + 1
+        YNoT -> YNoT + 1
